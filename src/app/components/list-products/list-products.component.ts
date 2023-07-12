@@ -9,12 +9,14 @@ import { Product } from 'src/app/interfaces/product';
 export class ListProductsComponent implements OnInit {
   listProducts: Product[] = [
     {
+      id: 1,
       name: 'Coca Cola',
       description: 'Bebida con azucar',
       price: 4,
       stock: 200
     },
     {
+      id: 2,
       name: 'Corona',
       description: 'Bebida con alcohol',
       price: 5,
