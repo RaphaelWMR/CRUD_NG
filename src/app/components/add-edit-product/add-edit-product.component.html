@@ -6,9 +6,21 @@
                 <form [formGroup]="form" (ngSubmit)="addProduct()">
                     <!--El nombre de la variable del formulario en el component-->
                     <input formControlName="name" type="text" class="form-control" placeholder="Ingrese nombre">
+                    <span *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+                        El campo nombre es <strong>requerido</strong>
+                    </span>
                     <input formControlName="description" type="text" class="form-control mt-2" placeholder="Ingrese descripcion">
-                    <input formControlName="price" type="text" class="form-control mt-2" placeholder="Ingrese precio">
-                    <input formControlName="stock" type="text" class="form-control mt-2" placeholder="Ingrese stock">
+                    <span *ngIf="form.get('description')?.hasError('required') && form.get('description')?.touched">
+                        El campo descripcion es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="price" type="number" class="form-control mt-2" placeholder="Ingrese precio">
+                    <span *ngIf="form.get('price')?.hasError('required') && form.get('price')?.touched">
+                        El campo precio es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="stock" type="number" class="form-control mt-2" placeholder="Ingrese stock">
+                    <span *ngIf="form.get('stock')?.hasError('required') && form.get('stock')?.touched">
+                        El campo stock es <strong>requerido</strong>
+                    </span>
                     <div class="row mt-2 text-center">
                         <div class="col-lg-6">
                             <button routerLink="/" type="button" class="btn btn-secondary">Volver</button>
@@ -18,7 +30,6 @@
                             <!--Form invalid es una propiedad del form-->
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
