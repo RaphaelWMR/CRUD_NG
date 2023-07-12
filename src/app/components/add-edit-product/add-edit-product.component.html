@@ -3,17 +3,19 @@
         <div class="card border-secondary mb-3" style="max-width: 25rem;">
             <div class="card-header text-center">Agregar producto</div>
             <div class="card-body">
-                <form action="">
-                    <input type="text" class="form-control" placeholder="Ingrese nombre">
-                    <input type="text" class="form-control mt-2" placeholder="Ingrese descripcion">
-                    <input type="text" class="form-control mt-2" placeholder="Ingrese precio">
-                    <input type="text" class="form-control mt-2" placeholder="Ingrese stock">
+                <form [formGroup]="form" (ngSubmit)="addProduct()">
+                    <!--El nombre de la variable del formulario en el component-->
+                    <input formControlName="name" type="text" class="form-control" placeholder="Ingrese nombre">
+                    <input formControlName="description" type="text" class="form-control mt-2" placeholder="Ingrese descripcion">
+                    <input formControlName="price" type="text" class="form-control mt-2" placeholder="Ingrese precio">
+                    <input formControlName="stock" type="text" class="form-control mt-2" placeholder="Ingrese stock">
                     <div class="row mt-2 text-center">
                         <div class="col-lg-6">
                             <button routerLink="/" type="button" class="btn btn-secondary">Volver</button>
                         </div>
                         <div class="col-lg-6">
-                            <button type="button" class="btn btn-primary">Aceptar</button>
+                            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Aceptar</button>
+                            <!--Form invalid es una propiedad del form-->
                         </div>
                     </div>
 
