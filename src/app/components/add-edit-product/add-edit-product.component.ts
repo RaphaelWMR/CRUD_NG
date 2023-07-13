@@ -25,8 +25,6 @@ export class AddEditProductComponent implements OnInit {
   }
 
   addProduct() {
-    console.log(this.form.value.name);
-
     const product: Product = {
       name: this.form.value.name,
       description: this.form.value.description,
