@@ -23,7 +23,7 @@
                 <td>{{ item.price | currency }}</td>
                 <td>{{ item.stock }}</td>
                 <td>
-                    <button routerLink=" /edit/{{item.id}} " type=" button " class=" btn btn-info btn-sm ">Edit</button>
+                    <button routerLink="/edit/{{item.id}} " type=" button " class=" btn btn-info btn-sm ">Edit</button>
                     <button (click)=" deleteProduct(item.id!) " type=" button " class=" btn btn-secondary btn-sm ms-2 ">Delete</button>
                     <!--Cuando ponemos un " ! " en typescript decimos que esto si o si tendra un valor y no sera undefined -->
                 </td>
