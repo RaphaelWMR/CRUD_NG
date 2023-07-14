@@ -1,4 +1,5 @@
-<div class="container">
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="container">
     <div class="tittle">
         <h4>Listado de productos</h4>
         <button type="button" class="btn btn-primary" routerLink="/add">Agregar Producto</button>
@@ -19,11 +20,12 @@
                 <!--Ng For es para iterar-->
                 <td>{{ item.name }}</td>
                 <td>{{ item.description }}</td>
-                <td>{{ item.price }}</td>
+                <td>{{ item.price | currency }}</td>
                 <td>{{ item.stock }}</td>
                 <td>
                     <button routerLink="/edit/{{item.id}}" type="button" class="btn btn-info btn-sm">Edit</button>
-                    <button type="button" class="btn btn-secondary btn-sm ms-2">Delete</button>
+                    <button (click)="deleteProduct(item.id!)" type="button" class="btn btn-secondary btn-sm ms-2">Delete</button>
+                    <!--Cuando ponemos un "!" en typescript decimos que esto si o si tendra un valor y no sera undefined-->
                 </td>
             </tr>
         </tbody>

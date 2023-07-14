@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ListProductsComponent implements OnInit {
   listProducts: Product[] = []
-
+  loading: boolean = false;
 
   constructor(private _productService: ProductService) {
 
@@ -19,8 +19,23 @@ export class ListProductsComponent implements OnInit {
   }
 
   getListProducts() {
-    this._productService.getListProducts().subscribe((data) => {
-      this.listProducts = data;
-    })
+    this.loading = true;
+    setTimeout(() => { //Solo una animacion para que se vea la barra de carga
+      this._productService.getListProducts().subscribe((data: Product[]) => {
+        this.listProducts = data;
+      })
+      this.loading = false;
+    }, 250);
+
+
+  }
+
+  deleteProduct(id: number) {
+    this.loading = true;
+    setTimeout(() => { //Solo una animacion para que se vea la barra de carga
+      this._productService.deleteProduct(id).subscribe(data => {
+        this.getListProducts();
+      })
+    }, 25);
   }
 }
