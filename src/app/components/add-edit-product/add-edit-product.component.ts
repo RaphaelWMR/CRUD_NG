@@ -35,8 +35,24 @@ export class AddEditProductComponent implements OnInit {
     if (this.id != 0) {
       //Editar
       this.operacion = "Editar ";
+      this.getProduct(this.id);
     }
   }
+
+  getProduct(id: number) {
+    this.loading = true;
+    this._productService.getProduct(id).subscribe((data: Product) => {
+      this.loading = false;
+      this.form.setValue({
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        stock: data.stock
+      });
+    })
+  }
+
+
 
   addProduct() {
     const product: Product = {
@@ -46,11 +62,23 @@ export class AddEditProductComponent implements OnInit {
       stock: this.form.value.stock
     }
     this.loading = true;
-    this._productService.saveProduct(product).subscribe(() => {
-      this.loading = false;
-      this.toastr.success(`El producto ${product.name} fue registrado con exito`, 'Producto registrado');
-      this.router.navigate(['/']);
-    });
+    if (this.id !== 0) {
+      //es editar
+      product.id = this.id;
+      this._productService.updateProduct(this.id, product).subscribe(() => {
+        this.toastr.success(`El producto ${product.name} fue actualizado con exito`, 'Producto actualizado');
+        this.router.navigate(['/']);
+      });
+    } else {
+      //es agregar
+      this._productService.saveProduct(product).subscribe(() => {
+        this.loading = false;
+        this.toastr.success(`El producto ${product.name} fue registrado con exito`, 'Producto registrado');
+        this.router.navigate(['/']);
+      });
+    }
+
+
   }
 
 
