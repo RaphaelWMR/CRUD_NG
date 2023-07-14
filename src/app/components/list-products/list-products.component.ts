@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
 import { Product } from 'src/app/interfaces/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -11,7 +13,7 @@ export class ListProductsComponent implements OnInit {
   listProducts: Product[] = []
   loading: boolean = false;
 
-  constructor(private _productService: ProductService) {
+  constructor(private _productService: ProductService, private toastr: ToastrService) {
 
   }
   ngOnInit(): void {
@@ -32,10 +34,9 @@ export class ListProductsComponent implements OnInit {
 
   deleteProduct(id: number) {
     this.loading = true;
-    setTimeout(() => { //Solo una animacion para que se vea la barra de carga
-      this._productService.deleteProduct(id).subscribe(data => {
-        this.getListProducts();
-      })
-    }, 25);
+    this._productService.deleteProduct(id).subscribe(() => {
+      this.getListProducts();
+      this.toastr.warning('El producto fue eliminado con exito', 'Producto eliminado');
+    })
   }
 }
