@@ -5,29 +5,30 @@
         <button type="button" class="btn btn-primary" routerLink="/add">Agregar Producto</button>
     </div>
 
-    <table class="table table-hover">
+    <table *ngIf="listProducts.length>0" class=" table table-hover ">
         <thead>
             <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Stock</th>
-                <th class="col"></th>
+                <th scope=" col ">Nombre</th>
+                <th scope=" col ">Descripcion</th>
+                <th scope=" col ">Precio</th>
+                <th scope=" col ">Stock</th>
+                <th class=" col "></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of listProducts" class="table-active">
+            <tr *ngFor=" let item of listProducts " class=" table-active ">
                 <!--Ng For es para iterar-->
                 <td>{{ item.name }}</td>
                 <td>{{ item.description }}</td>
                 <td>{{ item.price | currency }}</td>
                 <td>{{ item.stock }}</td>
                 <td>
-                    <button routerLink="/edit/{{item.id}}" type="button" class="btn btn-info btn-sm">Edit</button>
-                    <button (click)="deleteProduct(item.id!)" type="button" class="btn btn-secondary btn-sm ms-2">Delete</button>
-                    <!--Cuando ponemos un "!" en typescript decimos que esto si o si tendra un valor y no sera undefined -->
+                    <button routerLink=" /edit/{{item.id}} " type=" button " class=" btn btn-info btn-sm ">Edit</button>
+                    <button (click)=" deleteProduct(item.id!) " type=" button " class=" btn btn-secondary btn-sm ms-2 ">Delete</button>
+                    <!--Cuando ponemos un " ! " en typescript decimos que esto si o si tendra un valor y no sera undefined -->
                 </td>
             </tr>
         </tbody>
     </table>
+    <h5 *ngIf="listProducts.length==0">No hay productos para mostrar</h5>
 </div>
